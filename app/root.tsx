@@ -1,6 +1,7 @@
 import {
   isRouteErrorResponse,
   Links,
+  Link,
   Meta,
   Outlet,
   Scripts,
@@ -25,14 +26,27 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="jp">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="">
+        <header className="bg-white p-4 ">
+          <nav className="flex max-w-7xl mx-auto justify-between bg-blue-200">
+            <div className="font-bold text-2xl text-black">
+              Portfolio / yukimizu
+            </div>
+            <div className="hidden md:flex gap-8 font-bold text-xl text-black">
+              <Link to="/profile" className="hover:text-blue-600 transition-colors">profile</Link>
+              <Link to="/works" className="hover:text-blue-600 transition-colors">works</Link>
+              <Link to="/contact" className="hover:text-blue-600 transition-colors">contact</Link>
+              <Link to="/blog" className="hover:text-blue-600 transition-colors">blog</Link>
+            </div>
+          </nav>
+        </header>
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -54,7 +68,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     message = error.status === 404 ? "404" : "Error";
     details =
       error.status === 404
-        ? "The requested page could not be found."
+        ? "見つからないよ〜〜〜"
         : error.statusText || details;
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message;
