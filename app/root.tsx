@@ -7,7 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-
+import { useState } from "react";
 import type { Route } from "./+types/root";
 import "./app.css";
 
@@ -25,6 +25,9 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
   return (
     <html lang="jp">
       <head>
@@ -35,17 +38,36 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="">
         <header className="bg-white p-4 ">
-          <nav className="flex max-w-7xl mx-auto justify-between bg-blue-200">
-            <div className="font-bold text-2xl text-black">
-              Portfolio / yukimizu
+          <nav className="flex max-w-7xl mx-auto justify-between">
+            <div className="font-bold text-2xl text-black hover:text-gray-600 rounded-md transition-colors">
+              <Link to="/">Portfolio / yukimizu</Link>
             </div>
             <div className="hidden md:flex gap-8 font-bold text-xl text-black">
-              <Link to="/profile" className="hover:text-blue-600 transition-colors">profile</Link>
-              <Link to="/works" className="hover:text-blue-600 transition-colors">works</Link>
-              <Link to="/contact" className="hover:text-blue-600 transition-colors">contact</Link>
-              <Link to="/blog" className="hover:text-blue-600 transition-colors">blog</Link>
+              <Link to="/profile" className="hover:text-gray-600 transition-colors">profile</Link>
+              <Link to="/works" className="hover:text-gray-600 transition-colors">works</Link>
+              <Link to="/contact" className="hover:text-gray-600 transition-colors">contact</Link>
+              <Link to="/blog" className="hover:text-gray-600 transition-colors">blog</Link>
             </div>
+            <button
+              className="md:hidden p-2 focus:outline-none text-black hover:text-gray-400"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {isMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </nav>
+          {isMenuOpen && (
+            <div className="md:hidden bg-white px-4 pt-2 pb-4 space-y-2 text-black">
+              <Link to="/profile" className="block py-2 hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>profile</Link>
+              <Link to="/works" className="block py-2 hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>works</Link>
+              <Link to="/contact" className="block py-2 hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>contact</Link>
+              <Link to="/blog" className="block py-2 hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>blog</Link>
+            </div>
+          )}
         </header>
         {children}
         <ScrollRestoration />
