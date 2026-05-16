@@ -4,6 +4,7 @@ import type { Config } from "@react-router/dev/config";
 
 export default {
   ssr: true,
+  buildDirectory: "build",
   async prerender() {
     const routes = ["/", "/works", "/profile", "/contact", "/blog"];
 
