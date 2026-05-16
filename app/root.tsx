@@ -36,40 +36,54 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="">
-        <header className="bg-white p-4 ">
-          <nav className="flex max-w-7xl mx-auto justify-between">
-            <div className="font-bold text-2xl text-black hover:text-gray-600 rounded-md transition-colors">
-              <Link to="/">Portfolio / yukimizu</Link>
+      <body className="overflow-y-scroll">
+        <div className="flex flex-col min-h-screen">
+          <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md p-4 border-b border-gray-100/50 shadow-sm transition-all">
+            <nav className="flex max-w-7xl mx-auto justify-between items-center">
+              <div className="font-bold text-2xl text-black hover:text-gray-600 rounded-md transition-colors">
+                <Link to="/">Portfolio / yukimizu</Link>
+              </div>
+              <div className="hidden md:flex gap-8 font-bold text-lg text-black items-center">
+                <Link to="/profile" className="hover:text-gray-600 transition-colors">profile</Link>
+                <Link to="/works" className="hover:text-gray-600 transition-colors">works</Link>
+                <Link to="/contact" className="hover:text-gray-600 transition-colors">contact</Link>
+                <Link to="/blog" className="hover:text-gray-600 transition-colors">blog</Link>
+              </div>
+              <button
+                className="md:hidden p-2 focus:outline-none text-black hover:text-gray-400"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {isMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </nav>
+            
+            {isMenuOpen && (
+              <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md px-4 py-4 space-y-4 text-black border-b border-gray-100 shadow-lg">
+                <Link to="/profile" className="block font-bold hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>profile</Link>
+                <Link to="/works" className="block font-bold hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>works</Link>
+                <Link to="/contact" className="block font-bold hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>contact</Link>
+                <Link to="/blog" className="block font-bold hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>blog</Link>
+              </div>
+              )
+            }
+          </header>
+          <main className="flex-grow">
+            {children}
+          </main>
+          
+          <footer className="py-8 mt-auto">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
+              <p className="text-sm text-gray-400 font-medium tracking-wider">
+                &copy; {new Date().getFullYear()} yukimizu. All rights reserved.
+              </p>
             </div>
-            <div className="hidden md:flex gap-8 font-bold text-xl text-black">
-              <Link to="/profile" className="hover:text-gray-600 transition-colors">profile</Link>
-              <Link to="/works" className="hover:text-gray-600 transition-colors">works</Link>
-              <Link to="/contact" className="hover:text-gray-600 transition-colors">contact</Link>
-              <Link to="/blog" className="hover:text-gray-600 transition-colors">blog</Link>
-            </div>
-            <button
-              className="md:hidden p-2 focus:outline-none text-black hover:text-gray-400"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                {isMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
-          </nav>
-          {isMenuOpen && (
-            <div className="md:hidden bg-white px-4 pt-2 pb-4 space-y-2 text-black">
-              <Link to="/profile" className="block py-2 hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>profile</Link>
-              <Link to="/works" className="block py-2 hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>works</Link>
-              <Link to="/contact" className="block py-2 hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>contact</Link>
-              <Link to="/blog" className="block py-2 hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>blog</Link>
-            </div>
-          )}
-        </header>
-        {children}
+          </footer>
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>
