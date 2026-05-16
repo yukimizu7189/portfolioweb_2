@@ -1,7 +1,7 @@
-import fs from "node:fs";
-import path from "node:path";
+import worksJson from "../data/works.json";
 import { Link } from "react-router";
 import type { Route } from "./+types/home.tsx"; // ※ファイル名に合わせてください
+import FadeIn from "../components/FadeIn";
 
 type WorkItem = {
   id: string;
@@ -15,9 +15,7 @@ type WorkItem = {
 };
 
 export async function loader() {
-  const filePath = path.join(process.cwd(), "app/data/works.json");
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  const rawWorksData: WorkItem[] = JSON.parse(fileContent);
+  const rawWorksData = worksJson as WorkItem[];
 
   const worksData = await Promise.all(
     rawWorksData.map(async (work) => {
@@ -41,7 +39,7 @@ export async function loader() {
 
             return {
               ...work,
-              title: work.title || `${work.type} 投稿`,
+              title: work.title || ``,
               description: text || work.description,
               imageUrl: fetchedImage || work.imageUrl,
               link: cleanUrl,
@@ -70,87 +68,93 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     <div className="space-y-32 pb-24">
       
       <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-        <h1 className="text-6xl md:text-8xl font-extrabold text-white tracking-tight mb-6">
-          Hello, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">yukimizu</span>
-        </h1>
-        <p className="mt-4 text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-medium">
-          メディアコンテンツと同人文化に生きる人<br />
-        </p>
-        <div className="mt-10 flex justify-center gap-4">
-          <Link to="/works" className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors shadow-lg border border-gray-700">
-            View Works
-          </Link>
-          <Link to="/profile" className="bg-white text-gray-900 border border-gray-200 px-8 py-3 rounded-full font-bold hover:bg-gray-50 transition-colors shadow-sm">
-            About Me
-          </Link>
-        </div>
+        <FadeIn>
+          <h1 className="text-6xl md:text-8xl font-extrabold text-white tracking-tight mb-6">
+            Hello, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">yukimizu</span>
+          </h1>
+          <p className="mt-4 text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-medium">
+            メディアコンテンツと同人文化に生きる人<br />
+          </p>
+          <div className="mt-10 flex justify-center gap-4">
+            <Link to="/works" className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors shadow-lg border border-gray-700">
+              View Works
+            </Link>
+            <Link to="/profile" className="bg-white text-gray-900 border border-gray-200 px-8 py-3 rounded-full font-bold hover:bg-gray-50 transition-colors shadow-sm">
+              About Me
+            </Link>
+          </div>
+        </FadeIn>
       </section>
 
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="flex justify-between items-end mb-8 border-b border-gray-700 pb-4">
-          <div>
-            <h2 className="text-3xl font-bold text-white">Works</h2>
-            <p className="text-gray-400 mt-1">新着作例</p>
+        <FadeIn>
+          <div className="flex justify-between items-end mb-8 border-b border-gray-700 pb-4">
+            <div>
+              <h2 className="text-3xl font-bold text-white">Works</h2>
+              <p className="text-gray-400 mt-1">新着作例</p>
+            </div>
+            <Link to="/works" className="text-blue-500 font-bold hover:text-blue-400 transition-colors">
+              View All →
+            </Link>
           </div>
-          <Link to="/works" className="text-blue-500 font-bold hover:text-blue-400 transition-colors">
-            View All →
-          </Link>
-        </div>
+        </FadeIn>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {loaderData.map((work) => {
+          {loaderData.map((work, index) => {
             const CardWrapper = work.link ? "a" : "div";
             const wrapperProps = work.link ? { href: work.link, target: "_blank", rel: "noopener noreferrer" } : {};
 
             return (
-              <CardWrapper
-                key={work.id}
-                {...wrapperProps}
-                className={`group flex flex-col h-full bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-200 ${
-                  work.link ? "hover:border-blue-200 hover:shadow-md cursor-pointer" : ""
-                }`}
-              >
-                
-                {work.imageUrl && (
-                  <div className="relative aspect-video bg-gray-100 overflow-hidden shrink-0">
-                    <img 
-                      src={work.imageUrl} 
-                      alt={work.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    {work.type === "Video" && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
-                        <svg className="w-12 h-12 text-white opacity-90" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                <div className="p-5 flex-grow flex flex-col">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold tracking-wider text-blue-600 uppercase">
-                      {work.type.replace("_", " ")}
-                    </span>
-                    <time className="text-xs text-gray-400">{work.date}</time>
-                  </div>
+              <FadeIn key={work.id} delay={index * 150}>
+                <CardWrapper
+                  key={work.id}
+                  {...wrapperProps}
+                  className={`group flex flex-col h-full bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-200 ${
+                    work.link ? "hover:border-blue-200 hover:shadow-md cursor-pointer" : ""
+                  }`}
+                >
                   
-                  {work.title && (
-                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                      {work.title}
-                    </h3>
+                  {work.imageUrl && (
+                    <div className="relative aspect-video bg-gray-100 overflow-hidden shrink-0">
+                      <img 
+                        src={work.imageUrl} 
+                        alt={work.title} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      {work.type === "Video" && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
+                          <svg className="w-12 h-12 text-white opacity-90" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
                   )}
 
-                  {work.description && (
-                    <p className="text-sm text-gray-700 leading-relaxed mt-2 line-clamp-2">
-                      {work.description}
-                    </p>
-                  )}
+                  <div className="p-5 flex-grow flex flex-col">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-bold tracking-wider text-blue-600 uppercase">
+                        {work.type.replace("_", " ")}
+                      </span>
+                      <time className="text-xs text-gray-400">{work.date}</time>
+                    </div>
+                    
+                    {work.title && (
+                      <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        {work.title}
+                      </h3>
+                    )}
+
+                    {work.description && (
+                      <p className="text-sm text-gray-700 leading-relaxed mt-2 line-clamp-2">
+                        {work.description}
+                      </p>
+                    )}
 
 
-                </div>
-              </CardWrapper>
+                  </div>
+                </CardWrapper>
+              </FadeIn>
 
             );
           })}

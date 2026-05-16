@@ -3,6 +3,7 @@ import path from "node:path";
 import matter from "gray-matter";
 import { Link } from "react-router";
 import type { Route } from "./+types/index";
+import FadeIn from "../../components/FadeIn";
 
 // ▼ 1. loader: フォルダ内のすべてのMarkdownを読み込んでリスト化する
 export function loader() {
@@ -44,17 +45,17 @@ export function meta({}: Route.MetaArgs) {
 export default function BlogIndex({ loaderData }: Route.ComponentProps) {
   return (
     <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-10">
-      
-      {/* ページタイトル */}
-      <header className="border-b pb-4">
-        <h1 className="text-4xl font-extrabold text-white tracking-tight">Blog</h1>
-        <p className="mt-2 text-gray-500 text-lg">技術の学びや日常の記録</p>
-      </header>
+      <FadeIn>
+        <header className="border-b pb-4">
+          <h1 className="text-4xl font-extrabold text-white tracking-tight">Blog</h1>
+          <p className="mt-2 text-gray-300 text-lg">技術の学びや日常の記録</p>
+        </header>
+      </FadeIn>
 
-      {/* 記事一覧のリスト */}
       <div className="grid gap-6">
         {/* JavaScriptの map関数 で配列の中身を1つずつHTMLに変換する */}
-        {loaderData.map((post) => (
+        {loaderData.map((post, index) => (
+          <FadeIn delay={index * 150}>
           <article 
             key={post.slug} 
             className="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-200"
@@ -68,6 +69,7 @@ export default function BlogIndex({ loaderData }: Route.ComponentProps) {
               </h2>
             </Link>
           </article>
+          </FadeIn>
         ))}
       </div>
 

@@ -8,6 +8,5 @@ date: 2026.05.04
 ## 技術スタック
 - React Router v7
 - Tailwind CSS v4
-- EndeavourOS (開発環境)
 
 ここからどんどん記事を追加していきます！

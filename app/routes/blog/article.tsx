@@ -34,7 +34,7 @@ export default function Article({ loaderData }: Route.ComponentProps) {
       <div className="mb-8">
         <Link 
           to="/blog" 
-          className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors"
+          className="inline-flex items-center text-sm font-medium text-gray-300 hover:text-gray-900 transition-colors"
         >
           <svg className="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
