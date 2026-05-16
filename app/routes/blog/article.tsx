@@ -1,24 +1,29 @@
-import fs from "node:fs";
-import path from "node:path";
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
-import { Link } from "react-router"; // ← 追加: 戻るリンク用
+import { Link } from "react-router";
 import type { Route } from "./+types/article";
 
-export function loader({ params }: Route.LoaderArgs) {
-  const slug = params.slug;
-  try {
-    const filePath = path.join(process.cwd(), "app/posts", `${slug}.md`);
-    const fileContent = fs.readFileSync(filePath, "utf-8");
-    const { data, content } = matter(fileContent);
-    return {
-      title: data.title,
-      date: data.date,
-      content: content,
-    };
-  } catch (error) {
+export async function loader({ params }: Route.LoaderArgs) {
+  const files = import.meta.glob("../../posts/*.md", { 
+    query: "?raw", 
+    import: "default", 
+    eager: true 
+  }) as Record<string, string>;
+
+  const targetPath = `../../posts/${params.slug}.md`;
+  const fileContent = files[targetPath];
+
+  if (!fileContent) {
     throw new Response("Not Found", { status: 404 });
   }
+
+  const { data, content } = matter(fileContent);
+
+  return {
+    title: data.title,
+    date: data.date,
+    content: content,
+  };
 }
 
 export function meta({ data }: Route.MetaArgs) {
