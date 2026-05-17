@@ -61,5 +61,35 @@
     "title": "札幌",
     "tweetUrl": "https://x.com/yukimizu7189/status/1907770395979370822?s=20",
     "date": "2025.04.03"
+  },
+  {
+    "id": "11",
+    "type": "Cosplay_photo",
+    "tweetUrl": "https://x.com/renu273_cos/status/2048016328762785899?s=20",
+    "date": "2026.04.25"
+  },
+  {
+    "id": "12",
+    "type": "Cosplay_photo",
+    "tweetUrl": "https://x.com/renu273_cos/status/2030851281716453666?s=20",
+    "date": "2026.03.09"
+  },
+  {
+    "id": "13",
+    "type": "Cosplay_photo",
+    "tweetUrl": "https://x.com/renu273_cos/status/2005459731205501178?s=20",
+    "date": "2025.12.29"
+  },
+  {
+    "id": "14",
+    "type": "Cosplay_photo",
+    "tweetUrl": "https://x.com/renu273_cos/status/1966460684926894118?s=20",
+    "date": "2025.09.12"
+  },
+  {
+    "id": "15",
+    "type": "Cosplay_photo",
+    "tweetUrl": "https://x.com/renu273_cos/status/1964084419956003024?s=20",
+    "date": "2025.09.06"
   }
 ]
