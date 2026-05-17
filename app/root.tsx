@@ -72,11 +72,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
               )
             }
           </header>
-          <main className="flex-grow">
+          <main className="flex-grow bg-black">
             {children}
           </main>
           
-          <footer className="py-8 mt-auto">
+          <footer className="py-8 mt-auto bg-black">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
               <p className="text-sm text-gray-400 font-medium tracking-wider">
                 &copy; {new Date().getFullYear()} yukimizu. All rights reserved.
