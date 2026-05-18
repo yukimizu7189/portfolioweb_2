@@ -54,49 +54,41 @@ export function meta({ data }: Route.MetaArgs) {
 
 export default function Article({ loaderData }: Route.ComponentProps) {
   return (
-    // 記事全体のコンテナ: 読みやすい最大幅(max-w-3xl)を設定し、中央寄せ
-    <div className="max-w-5xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-5xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
 
-      {/* ▼ 1. ブログ一覧に戻るリンク */}
-      <div className="mb-8">
-        <Link 
-          to="/blog" 
-          className="inline-flex items-center text-sm font-bold text-gray-600 hover:text-accent-600 transition-colors"
-        >
-          <svg className="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Back to Blog
-        </Link>
-      </div>
-
-      <article className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-
-        {/* ▼ 2. 記事のヘッダー部分 */}
-        <header className="bg-gray-50/50 px-8 py-10 border-b border-gray-100 text-center">
-          <time className="text-sm font-semibold tracking-wide text-accent-600 uppercase" style={{ color: '#ff1a6d' }}>
-            {loaderData.date}
-          </time>
-          <h1 className="mt-4 text-3xl font-extrabold text-black sm:text-4xl leading-tight tracking-tighter">
-            {loaderData.title}
-          </h1>
-        </header>
-
-        {/* ▼ 3. 記事の本文エリア */}
-        <div className="px-8 py-10 sm:px-12">
-          {/* 
-            prose: Tailwind Typographyの基本クラス 
-            prose-pink: リンクなどのアクセントカラーをピンクに
-            prose-lg: 文字を少し大きめに（読みやすく）
-            max-w-none: 横幅制限を解除して親要素の幅に合わせる
-            mx-auto: 中央寄せ
-          */}
-          <div className="prose prose-pink prose-lg max-w-none text-gray-700 mx-auto">
-            <ReactMarkdown>{loaderData.content}</ReactMarkdown>
-          </div>
+        {/* ▼ 1. ブログ一覧に戻るリンク */}
+        <div className="mb-12">
+          <Link 
+            to="/blog" 
+            className="group inline-flex items-center text-sm font-black tracking-widest text-black uppercase hover:text-accent-500 transition-colors"
+          >
+            <svg className="mr-2 w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Index
+          </Link>
         </div>
-      </article>
 
-    </div>
-  );
-}
+        <article className="bg-white border-4 border-black shadow-[16px_16px_0px_0px_rgba(255,0,127,0.1)] overflow-hidden">
+
+          {/* ▼ 2. 記事のヘッダー部分 */}
+          <header className="bg-black px-8 py-16 text-center">
+            <time className="text-sm font-black tracking-[0.3em] text-accent-500 uppercase">
+              {loaderData.date}
+            </time>
+            <h1 className="mt-6 text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-tight">
+              {loaderData.title}
+            </h1>
+          </header>
+
+          {/* ▼ 3. 記事の本文 (Markdown) */}
+          <div className="px-8 py-16 sm:px-16">
+            <div className="prose prose-pink prose-xl max-w-none text-gray-800 mx-auto font-medium leading-relaxed">
+              <ReactMarkdown>{loaderData.content}</ReactMarkdown>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    );
+    }

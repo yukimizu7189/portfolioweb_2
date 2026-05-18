@@ -12,7 +12,7 @@ const Sparkle = ({ size = 24, className = "" }: { size?: number, className?: str
   </svg>
 );
 
-export default function RichBackground() {
+export default function RichBackground({ title }: { title?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,73 +30,83 @@ export default function RichBackground() {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-0 overflow-hidden pointer-events-none"
+      className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-white"
       style={{ "--scroll-y": "0px" } as React.CSSProperties}
     >
-      {/* --- Parallax Layer: Fast (-0.4) --- */}
+      {/* Background Vivid Gradients */}
+      <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-accent-500/10 rounded-full blur-[120px] animate-blob" style={{ backgroundColor: 'rgba(255, 0, 127, 0.12)' }} />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-blue-500/10 rounded-full blur-[100px] animate-blob" style={{ animationDelay: '-5s', backgroundColor: 'rgba(59, 130, 246, 0.08)' }} />
+
+      {/* Overflowing Background Title */}
+      {title && (
+        <div className="absolute top-[15%] left-[-5%] whitespace-nowrap text-[20vw] font-black text-black/[0.03] leading-none select-none tracking-tighter uppercase">
+          {title}
+        </div>
+      )}
+
+      {/* --- Parallax Layer: Slow (-0.15) for Large Decorative Elements --- */}
+      <div 
+        className="absolute inset-0 transition-transform duration-150"
+        style={{ transform: "translateY(calc(var(--scroll-y) * -0.15))" }}
+      >
+        {/* Giant Sparkles (Now Scroll-Responsive) */}
+        <Sparkle size={450} className="absolute top-[65%] left-[-180px] text-accent-500/05 rotate-[25deg]" style={{ color: 'rgba(255, 0, 127, 0.05)' }} />
+        <Sparkle size={350} className="absolute top-[5%] right-[-120px] text-blue-500/05 -rotate-[15deg]" style={{ color: 'rgba(59, 130, 246, 0.05)' }} />
+      </div>
+
+      {/* --- Parallax Layer: Fast (-0.5) --- */}
       <div 
         className="absolute inset-0 transition-transform duration-75"
-        style={{ transform: "translateY(calc(var(--scroll-y) * -0.4))" }}
+        style={{ transform: "translateY(calc(var(--scroll-y) * -0.5))" }}
       >
-        {/* Large Vertical Lines */}
-        <div className="absolute top-[5%] left-[8%] w-[2px] h-64 bg-black/20" />
-        <div className="absolute top-[45%] right-[20%] w-[2px] h-96 bg-accent-500/40" style={{ backgroundColor: 'rgba(255, 26, 109, 0.4)' }} />
+        {/* Fine Lines */}
+        <div className="absolute top-[5%] left-[12%] w-[1px] h-screen bg-black/10" />
+        <div className="absolute top-[20%] right-[10%] w-[1px] h-[800px] bg-accent-500/30" style={{ backgroundColor: 'rgba(255, 0, 127, 0.3)' }} />
         
-        {/* Bold Arrows */}
-        <div className="absolute top-[10%] right-[35%] text-black/30 rotate-45">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </div>
-        <div className="absolute top-[75%] left-[12%] text-accent-500/50 -rotate-12" style={{ color: 'rgba(255, 26, 109, 0.5)' }}>
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4">
+        {/* Subtle Decorative Elements */}
+        <div className="absolute top-[40%] right-[25%] text-black/20 rotate-12 scale-110">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </div>
 
         {/* Large Sparkles (Fast) */}
-        <Sparkle size={48} className="absolute top-[20%] left-[55%] text-accent-500/60 animate-scale-pulse" style={{ color: 'rgba(255, 26, 109, 0.6)' }} />
+        <Sparkle size={64} className="absolute top-[25%] left-[60%] text-accent-500/40 animate-scale-pulse" style={{ color: 'rgba(255, 0, 127, 0.4)' }} />
       </div>
 
-      {/* --- Parallax Layer: Medium (-0.25) --- */}
+      {/* --- Parallax Layer: Medium (-0.3) --- */}
       <div 
         className="absolute inset-0 transition-transform duration-100"
-        style={{ transform: "translateY(calc(var(--scroll-y) * -0.25))" }}
+        style={{ transform: "translateY(calc(var(--scroll-y) * -0.3))" }}
       >
-        {/* Resized Floating Squares (Smaller) */}
-        <div className="absolute top-[15%] right-[10%] w-12 h-12 border-2 border-black/10 rotate-12" />
-        <div className="absolute bottom-[25%] left-[10%] w-16 h-16 border-2 border-accent-500/20 rotate-45" style={{ borderColor: 'rgba(255, 26, 109, 0.2)' }} />
+        {/* Floating Shapes */}
+        <div className="absolute top-[30%] right-[18%] w-24 h-24 border border-black/10 animate-spin-slow" />
+        <div className="absolute bottom-[35%] left-[20%] w-32 h-32 border border-accent-500/20 rotate-45 animate-float" style={{ borderColor: 'rgba(255, 0, 127, 0.2)' }} />
 
         {/* Prominent Sparkles (Medium) */}
-        <Sparkle size={80} className="absolute top-[45%] right-[20%] text-black/10 animate-float" />
-        <Sparkle size={40} className="absolute bottom-[20%] right-[15%] text-accent-500/40 animate-scale-pulse delay-700" style={{ color: 'rgba(255, 26, 109, 0.4)' }} />
+        <Sparkle size={100} className="absolute top-[55%] right-[22%] text-black/10 animate-float" />
       </div>
 
       {/* --- Background Static / Grid Layer --- */}
       <div className="absolute inset-0">
-        {/* Scroll-Responsive Grid */}
+        {/* Scroll-Responsive Grid (Refined) */}
         <div 
-          className="absolute inset-0"
+          className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgba(0,0,0,0.08) 1.5px, transparent 1.5px),
-              linear-gradient(to bottom, rgba(0,0,0,0.08) 1.5px, transparent 1.5px)
+              linear-gradient(to right, rgba(0,0,0,0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(0,0,0,0.1) 1px, transparent 1px)
             `,
-            backgroundSize: '60px 60px',
-            transform: "translateY(calc(var(--scroll-y) * 0.05))"
+            backgroundSize: '80px 80px',
+            transform: "translateY(calc(var(--scroll-y) * 0.08))"
           }}
         />
         
-        {/* Huge Shapes (Original) */}
-        <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] border-[4px] border-accent-500/20 rounded-full animate-float blur-md" 
-             style={{ borderColor: 'rgba(255, 26, 109, 0.2)' }} />
+        {/* Huge Shapes */}
+        <div className="absolute top-[10%] left-[5%] w-[800px] h-[800px] border-[2px] border-accent-500/10 animate-blob blur-sm" 
+             style={{ borderColor: 'rgba(255, 0, 127, 0.1)' }} />
         
-        {/* Resized Background Square (Smaller) */}
-        <div className="absolute top-[50%] right-[5%] w-24 h-24 border-[3px] border-black/10 animate-float-reverse" />
-
-        {/* Giant Background Sparkles */}
-        <Sparkle size={200} className="absolute top-[60%] left-[-50px] text-accent-500/10 rotate-[25deg]" style={{ color: 'rgba(255, 26, 109, 0.1)' }} />
-        <Sparkle size={120} className="absolute top-[5%] left-[40%] text-black/5 -rotate-[15deg]" />
+        <div className="absolute top-[65%] right-[-5%] w-64 h-64 border-[2px] border-black/5 animate-spin-slow" />
       </div>
     </div>
   );

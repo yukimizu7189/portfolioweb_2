@@ -65,28 +65,33 @@ export function meta({}: Route.MetaArgs) {
 // ▼ 2. 画面の描画
 export default function BlogIndex({ loaderData }: Route.ComponentProps) {
   return (
-    <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-10">
+    <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 space-y-16">
       <FadeIn>
-        <header className="border-b-2 border-black pb-4">
-          <h1 className="text-4xl font-extrabold text-black tracking-tighter uppercase">Blog</h1>
-          <p className="mt-2 text-gray-600 text-lg font-medium">技術の学びや日常の記録</p>
+        <header className="space-y-4">
+          <h1 className="text-5xl md:text-7xl font-black text-black uppercase tracking-tighter flex items-center gap-6">
+            Blog
+            <span className="h-[3px] flex-grow max-w-[200px] bg-accent-500" style={{ backgroundColor: '#ff007f' }}></span>
+          </h1>
+          <p className="text-gray-400 font-bold text-lg uppercase tracking-[0.3em]">Thoughts & Notes</p>
         </header>
       </FadeIn>
 
-      <div className="grid gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {loaderData.map((post, index) => (
-          // 💡 小さな修正: Reactの key は map の直下（一番外側のタグ）に付ける必要があるため、FadeIn に移動しました
           <FadeIn key={post.slug} delay={index * 150}>
             <article 
-              className="group bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-accent-200 hover:shadow-md transition-all duration-200"
+              className="group bg-white p-8 border-2 border-black hover:bg-black hover:text-white transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(255,0,127,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]"
             >
-              <Link to={`/blog/${post.slug}`} className="block">
-                <time className="text-sm font-semibold tracking-wide text-accent-600 uppercase" style={{ color: '#ff1a6d' }}>
+              <Link to={`/blog/${post.slug}`} className="block space-y-4">
+                <time className="text-xs font-black tracking-widest text-accent-500 uppercase group-hover:text-white transition-colors">
                   {post.date}
                 </time>
-                <h2 className="mt-2 text-2xl font-bold text-gray-900 group-hover:text-accent-600 transition-colors">
+                <h2 className="text-2xl font-black uppercase tracking-tight leading-tight transition-colors">
                   {post.title}
                 </h2>
+                <div className="pt-4">
+                  <span className="text-sm font-black tracking-widest uppercase border-b-2 border-current">Read More →</span>
+                </div>
               </Link>
             </article>
           </FadeIn>
@@ -94,4 +99,4 @@ export default function BlogIndex({ loaderData }: Route.ComponentProps) {
       </div>
     </div>
   );
-}
+  }

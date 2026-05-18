@@ -6,6 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "react-router";
 import { useState } from "react";
 import type { Route } from "./+types/root";
@@ -29,8 +30,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
+  const location = useLocation();
+  const getPageTitle = (pathname: string) => {
+    if (pathname === "/") return "Home";
+    if (pathname.startsWith("/profile")) return "Profile";
+    if (pathname.startsWith("/works")) return "Works";
+    if (pathname.startsWith("/contact")) return "Contact";
+    if (pathname.startsWith("/blog")) return "Blog";
+    return "";
+  };
+
   return (
-    <html lang="jp">
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,8 +50,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="overflow-y-scroll relative" style={{ backgroundColor: 'white', color: 'black' }}>
-        <RichBackground />
+        <RichBackground title={getPageTitle(location.pathname)} />
         <div className="flex flex-col min-h-screen relative z-10">
+
           <header className="sticky top-0 z-50 bg-white/60 backdrop-blur-xl p-4 border-b border-gray-200/50 transition-all">
             <nav className="flex max-w-7xl mx-auto justify-between items-center">
               <div className="font-light text-2xl text-black hover:text-accent-600 transition-colors tracking-tighter">

@@ -93,89 +93,98 @@ export default function Works({ loaderData }: Route.ComponentProps) {
   });
 
   return (
-    <div className="max-w-5xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-10">
+    <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 space-y-16">
 
-      <header className="border-b-2 border-black pb-4">
-        <h1 className="text-4xl font-extrabold text-black tracking-tighter uppercase">Works</h1>
-        <p className="mt-2 text-gray-600 text-lg font-medium">写真、映像、デザイン、コスプレなど</p>
+      <header className="space-y-4">
+        <h1 className="text-5xl md:text-7xl font-black text-black uppercase tracking-tighter flex items-center gap-6">
+          Works
+          <span className="h-[3px] flex-grow max-w-[200px] bg-accent-500" style={{ backgroundColor: '#ff007f' }}></span>
+        </h1>
+        <p className="text-gray-400 font-bold text-lg uppercase tracking-[0.3em]">
+          Creative Archive / {selectedCategory === "All" ? "Everything" : selectedCategory}
+        </p>
       </header>
 
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-4 border-b border-gray-100 pb-8">
         {categories.map((category) => (
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 border ${
+            className={`px-6 py-2 text-xs font-black tracking-widest uppercase transition-all duration-300 border-2 ${
               selectedCategory === category
-                ? "bg-accent-600 text-white shadow-md border-accent-600" 
-                : "bg-white/50 backdrop-blur-sm text-gray-600 hover:bg-gray-100 border-gray-200" 
+                ? "bg-black text-white border-black shadow-[4px_4px_0px_0px_rgba(255,0,127,1)]" 
+                : "bg-white text-gray-400 border-gray-100 hover:border-black hover:text-black" 
             }`}
-            style={selectedCategory === category ? { backgroundColor: '#ff1a6d', borderColor: '#ff1a6d' } : {}}
           >
             {category.replace("_", " ")}
           </button>
         ))}
       </div>
 
-      <div className="columns-1 sm:columns-2 md:columns-3 gap-6">
-
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-10 space-y-10">
         {filteredWorks.map((work, index) => {
           const CardWrapper = work.link ? "a" : "div";
           const wrapperProps = work.link ? { href: work.link, target: "_blank", rel: "noopener noreferrer" } : {};
 
           return (
-            <FadeIn key={work.id} delay={index * 100}>
+            <FadeIn key={work.id} delay={index * 50}>
               <CardWrapper
                 key={work.id}
                 {...wrapperProps}
-                className={`break-inside-avoid mb-6 group flex flex-col bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-200 ${
-                  work.link ? "hover:border-accent-200 hover:shadow-md cursor-pointer" : ""
+                className={`break-inside-avoid mb-10 group block relative bg-white transition-all duration-500 ${
+                  work.link ? "cursor-pointer" : ""
                 }`}
               >
-
-                {work.imageUrl && (
-                  <div className="relative bg-gray-100 overflow-hidden">
+                <div className="relative overflow-hidden bg-gray-50 border border-gray-50">
+                  {work.imageUrl && (
                     <img 
                       src={work.imageUrl} 
                       alt={work.title} 
-                      className="w-full h-auto block group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-auto block transition-all duration-700 group-hover:scale-[1.03]"
                     />
-                    {work.type === "Video" && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
-                        <svg className="w-12 h-12 text-white opacity-90" fill="currentColor" viewBox="0 0 24 24">
+                  )}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
+
+                  {/* Category Tag on Image */}
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-white text-[10px] font-black tracking-[0.2em] uppercase text-black border border-black/10">
+                      {work.type.replace("_", " ")}
+                    </span>
+                  </div>
+
+                  {work.type === "Video" && (
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                        <svg className="w-6 h-6 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z" />
                         </svg>
                       </div>
-                    )}
-                  </div>
-                )}
+                    </div>
+                  )}
+                </div>
 
-                <div className="p-5 flex-grow flex flex-col">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold tracking-wider text-accent-600 uppercase" style={{ color: '#ff1a6d' }}>
-                      {work.type.replace("_", " ")}
-                    </span>
-                    <time className="text-xs text-gray-400">{work.date}</time>
+                <div className="mt-6 space-y-3 px-1">
+                  <div className="flex justify-between items-center text-[10px] font-bold text-gray-400 tracking-widest uppercase">
+                    <span>{work.date}</span>
                   </div>
 
                   {work.title && (
-                    <h3 className="text-lg font-bold text-black group-hover:text-accent-600 transition-colors">
+                    <h3 className="text-2xl font-black text-black group-hover:text-accent-500 transition-colors tracking-tight leading-tight uppercase">
                       {work.title}
                     </h3>
                   )}
+
                   {work.description && (
-                    <p className="text-sm text-gray-700 leading-relaxed mt-2 line-clamp-3">
+                    <p className="text-sm text-gray-500 leading-relaxed font-medium">
                       {work.description}
                     </p>
                   )}
-
                 </div>
               </CardWrapper>
             </FadeIn>
           );
         })}
       </div>
-
     </div>
   );
-}
+  }

@@ -88,39 +88,58 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <div className="space-y-32 pb-24">
 
-      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+      <section className="relative pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <FadeIn>
-          <h1 className="text-6xl md:text-8xl font-extrabold text-black tracking-tight mb-6">
-            Hello, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-500 via-pink-400 to-black" style={{ backgroundImage: 'linear-gradient(to right, #ff1a6d, #f472b6, #000000)' }}>yukimizu</span>
-          </h1>
-          <p className="mt-4 text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto font-medium">
-            メディアコンテンツと同人文化に生きる人<br />
-          </p>
-          <div className="mt-10 flex justify-center gap-4">
-            <Link to="/works" className="bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-colors shadow-lg border border-black">
-              View Works
-            </Link>
-            <Link to="/profile" className="bg-white text-black border border-gray-200 px-8 py-3 rounded-full font-bold hover:bg-gray-50 transition-colors shadow-sm">
-              About Me
-            </Link>
-          </div>
-          </FadeIn>
-          </section>
-
-          <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <FadeIn>
-          <div className="flex justify-between items-end mb-8 border-b-2 border-black pb-4">
-            <div>
-              <h2 className="text-3xl font-bold text-black uppercase tracking-tighter">Works</h2>
-              <p className="text-gray-500 mt-1 font-medium">新着作例</p>
+          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-24">
+            <div className="flex-1 text-left space-y-8">
+              <h1 className="text-6xl md:text-8xl font-light text-black tracking-tighter leading-[0.9] uppercase">
+                Hello, <br />
+                I'm <span className="font-black italic text-accent-500" style={{ color: '#ff007f' }}>yukimizu</span>
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-500 font-medium max-w-xl leading-relaxed">
+                メディアコンテンツと同人文化に生きる人
+              </p>
+              <div className="pt-4 flex gap-6">
+                <Link to="/works" className="group relative px-8 py-3 bg-black text-white overflow-hidden transition-all hover:bg-accent-500">
+                  <span className="relative z-10 font-bold tracking-widest text-sm">VIEW WORKS</span>
+                </Link>
+                <Link to="/profile" className="group relative px-8 py-3 border border-black text-black overflow-hidden transition-all hover:bg-black hover:text-white">
+                  <span className="relative z-10 font-bold tracking-widest text-sm">ABOUT ME</span>
+                </Link>
+              </div>
             </div>
-            <Link to="/works" className="text-accent-600 font-bold hover:text-accent-500 transition-colors" style={{ color: '#ff1a6d' }}>
-              View All →
+            
+            <div className="flex-shrink-0 w-64 h-64 md:w-80 md:h-80 relative group">
+              <div className="absolute inset-0 border-2 border-black rotate-3 group-hover:rotate-6 transition-transform"></div>
+              <div className="absolute inset-0 border-2 border-accent-500 -rotate-3 group-hover:-rotate-6 transition-transform" style={{ borderColor: '#ff007f' }}></div>
+              <div className="relative z-10 w-full h-full bg-gray-100 flex items-center justify-center overflow-hidden">
+                <img src="/yukimizu_real.jpg" alt="Profile" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" />
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+
+      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <FadeIn>
+          <div className="flex justify-between items-end mb-16">
+            <div className="space-y-2">
+              <h2 className="text-4xl md:text-5xl font-black text-black uppercase tracking-tighter flex items-center gap-4">
+                Works
+                <span className="h-[2px] w-24 bg-accent-500" style={{ backgroundColor: '#ff007f' }}></span>
+              </h2>
+              <p className="text-gray-400 font-medium text-lg uppercase tracking-widest">Recent Creation</p>
+            </div>
+            <Link to="/works" className="group flex items-center gap-2 text-sm font-black tracking-widest uppercase hover:text-accent-500 transition-colors">
+              Explore All
+              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </Link>
           </div>
-          </FadeIn>
+        </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {loaderData.map((work, index) => {
             const CardWrapper = work.link ? "a" : "div";
             const wrapperProps = work.link ? { href: work.link, target: "_blank", rel: "noopener noreferrer" } : {};
@@ -130,75 +149,91 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                 <CardWrapper
                   key={work.id}
                   {...wrapperProps}
-                  className={`group flex flex-col h-full bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-200 ${
-                    work.link ? "hover:border-accent-200 hover:shadow-md cursor-pointer" : ""
+                  className={`group block relative bg-white transition-all duration-500 ${
+                    work.link ? "cursor-pointer" : ""
                   }`}
                 >
-
-                  {work.imageUrl && (
-                    <div className="relative aspect-video bg-gray-100 overflow-hidden shrink-0">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 border border-gray-100">
+                    {work.imageUrl && (
                       <img 
                         src={work.imageUrl} 
                         alt={work.title} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                       />
-                      {work.type === "Video" && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
-                          <svg className="w-12 h-12 text-white opacity-90" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" />
-                          </svg>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  <div className="p-5 flex-grow flex flex-col">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-bold tracking-wider text-accent-600 uppercase" style={{ color: '#ff1a6d' }}>
+                    )}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1 bg-white text-[10px] font-black tracking-[0.2em] uppercase text-black border border-black/10">
                         {work.type.replace("_", " ")}
                       </span>
-                      <time className="text-xs text-gray-400">{work.date}</time>
                     </div>
-
-                    {work.title && (
-                      <h3 className="text-lg font-bold text-black group-hover:text-accent-600 transition-colors">
-                        {work.title}
-                      </h3>
-                    )}
+                  </div>
+                  
+                  <div className="mt-6 space-y-2">
+                    <div className="flex justify-between items-center text-[10px] font-bold text-gray-400 tracking-widest uppercase">
+                      <span>{work.date}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-black group-hover:text-accent-500 transition-colors leading-tight">
+                      {work.title}
+                    </h3>
                     {work.description && (
-                      <p className="text-sm text-gray-700 leading-relaxed mt-2 line-clamp-2">
+                      <p className="text-sm text-gray-500 leading-relaxed line-clamp-3 mt-2">
                         {work.description}
                       </p>
                     )}
-
-
                   </div>
                 </CardWrapper>
-              </FadeIn>
+                    </FadeIn>
+                    );
+                    })}
+                    </div>
 
-            );
-          })}
-        </div>
+                    </section>
 
-      </section>
 
       <section className='px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'> 
-        <div className="flex justify-between items-end mb-8 border-b-2 border-black pb-4">
-          <div>
-            <h2 className="text-3xl font-bold text-black uppercase tracking-tighter">Banner</h2>
-            <p className="text-gray-500 mt-1 font-medium">リンク先と私は無関係です</p>
+        <FadeIn>
+          <div className="flex justify-between items-end mb-16">
+            <div className="space-y-2">
+              <h2 className="text-4xl md:text-5xl font-black text-black uppercase tracking-tighter flex items-center gap-4">
+                Banners
+                <span className="h-[2px] w-24 bg-accent-500" style={{ backgroundColor: '#ff007f' }}></span>
+              </h2>
+              <p className="text-gray-400 font-medium text-lg uppercase tracking-widest">リンク先と本サイトは無関係です</p>
+            </div>
           </div>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-20 justify-items-center">
-          <a href="https://love.tsukuba-ac.net/" target="_blank" rel="noreferrer" className="inline-block hover:scale-105 transition-transform">
-            <img src="https://love.tsukuba-ac.net/tsukuba-love1.png" className='grayscale hover:grayscale-0 transition-all shadow-sm' width = "200" height = "40" alt="つくば大好き連合"></img>
-          </a>
-          <a href="https://sites.google.com/view/happy-busy/" target="_blank" rel="noreferrer" className="inline-block hover:scale-105 transition-transform">
-            <img src="unnamed.png" className='grayscale hover:grayscale-0 transition-all shadow-sm' width = "200" height = "40" alt="時間のないサイト運営者リング"></img>
-          </a>
-          <a href="http://www.comiket.co.jp/" target="_blank" rel="noreferrer" className="inline-block hover:scale-105 transition-transform">
-            <img src="http://www.comiket.co.jp/images/comiket_banner00.gif" width="200" height="40" alt="コミックマーケット公式サイト" className='grayscale hover:grayscale-0 transition-all shadow-sm'></img>
-          </a>
+        </FadeIn>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 pb-20">
+          <FadeIn delay={100}>
+            <a href="https://love.tsukuba-ac.net/" target="_blank" rel="noreferrer" 
+               className="group block bg-white border-2 border-black p-6 transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(255,0,127,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]">
+              <div className="flex flex-col items-center gap-4">
+                <img src="https://love.tsukuba-ac.net/tsukuba-love1.png" className='grayscale group-hover:grayscale-0 transition-all' width="200" height="40" alt="つくば大好き連合"></img>
+                <span className="text-[10px] font-black tracking-[0.2em] uppercase text-gray-400 group-hover:text-black transition-colors">つくば大好き連合</span>
+              </div>
+            </a>
+          </FadeIn>
+
+          <FadeIn delay={200}>
+            <a href="https://sites.google.com/view/happy-busy/" target="_blank" rel="noreferrer"
+               className="group block bg-white border-2 border-black p-6 transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(255,0,127,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]">
+              <div className="flex flex-col items-center gap-4">
+                <img src="unnamed.png" className='grayscale group-hover:grayscale-0 transition-all' width="200" height="40" alt="時間のないサイト運営者リング"></img>
+                <span className="text-[10px] font-black tracking-[0.2em] uppercase text-gray-400 group-hover:text-black transition-colors">時間のないサイト運営者リング</span>
+              </div>
+            </a>
+          </FadeIn>
+
+          <FadeIn delay={300}>
+            <a href="http://www.comiket.co.jp/" target="_blank" rel="noreferrer"
+               className="group block bg-white border-2 border-black p-6 transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(255,0,127,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]">
+              <div className="flex flex-col items-center gap-4">
+                <img src="http://www.comiket.co.jp/images/comiket_banner00.gif" width="200" height="40" alt="コミックマーケット公式サイト" className='grayscale group-hover:grayscale-0 transition-all'></img>
+                <span className="text-[10px] font-black tracking-[0.2em] uppercase text-gray-400 group-hover:text-black transition-colors">Comic Market</span>
+              </div>
+            </a>
+          </FadeIn>
         </div>
       </section>
 
