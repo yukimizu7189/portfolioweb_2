@@ -134,5 +134,23 @@
     "type": "Cosplay_photo",
     "tweetUrl": "https://x.com/tsu16_o8/status/1972694107790393391?s=20",
     "date": "2025.09.30"
+  },
+  {
+    "id": "23",
+    "type": "Photo",
+    "tweetUrl": "https://x.com/yukimizu7189/status/1985340284193112485?s=20",
+    "date": "2025.11.03"
+  },
+  {
+    "id": "24",
+    "type": "Photo",
+    "tweetUrl": "https://x.com/yukimizu7189/status/1985342603047702902?s=20",
+    "date": "2025.11.03"
+  },
+  {
+    "id": "25",
+    "type": "Photo",
+    "tweetUrl": "https://x.com/yukimizu7189/status/1968190199743332857?s=20",
+    "date": "2025.09.17"
   }
 ]
