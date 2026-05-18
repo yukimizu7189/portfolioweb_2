@@ -37,7 +37,7 @@ export function loader() {
 }
 
 export function meta({}: Route.MetaArgs) {
-  const siteTitle = "works | yukimizu Portfolio ";
+  const siteTitle = "Blog | yukimizu Portfolio ";
   const siteDescription = "yukimizuのポートフォリオサイトです。";
   const siteUrl = "https://portfolio.yukidokemizu.com";
   const imageUrl = `${siteUrl}/icon.jpg`;
