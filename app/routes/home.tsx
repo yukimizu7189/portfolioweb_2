@@ -59,7 +59,29 @@ export async function loader() {
 }
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "yukimizu | Portfolio" }];
+  const siteTitle = "Portfolio | yukimizu ";
+  const siteDescription = "yukimizuのポートフォリオサイトです。";
+  const siteUrl = "https://portfolio.yukidokemizu.com";
+  const imageUrl = `${siteUrl}/icon.jpg`;
+
+  return [
+    { title: siteTitle },
+    { name: "description", content: siteDescription },
+
+    { property: "og:title", content: siteTitle },
+    { property: "og:description", content: siteDescription },
+    { property: "og:type", content: "website" }, 
+    { property: "og:url", content: siteUrl },
+    { property: "og:image", content: imageUrl },
+
+    //X専用の設定
+    { name: "twitter:card", content: "summary" }, 
+    { name: "twitter:site", content: "@yukimizu7189" }, 
+    { name: "twitter:title", content: siteTitle },
+    { name: "twitter:description", content: siteDescription },
+    { name: "twitter:image", content: imageUrl },
+    { title: "yukimizu | Portfolio" }
+  ];
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
