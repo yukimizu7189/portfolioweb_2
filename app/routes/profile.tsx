@@ -2,7 +2,29 @@ import type { Route } from "./+types/profile";
 import FadeIn from "../components/FadeIn";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "Profile | yukimizu Portfolio" }];
+  const siteTitle = "profile | yukimizu Portfolio ";
+  const siteDescription = "yukimizuのポートフォリオサイトです。";
+  const siteUrl = "https://portfolio.yukidokemizu.com";
+  const imageUrl = `${siteUrl}/icon.jpg`;
+
+  return [
+    { title: siteTitle },
+    { name: "description", content: siteDescription },
+
+    { property: "og:title", content: siteTitle },
+    { property: "og:description", content: siteDescription },
+    { property: "og:type", content: "website" }, 
+    { property: "og:url", content: siteUrl },
+    { property: "og:image", content: imageUrl },
+
+    //X専用の設定
+    { name: "twitter:card", content: "summary" }, 
+    { name: "twitter:site", content: "@yukimizu7189" }, 
+    { name: "twitter:title", content: siteTitle },
+    { name: "twitter:description", content: siteDescription },
+    { name: "twitter:image", content: imageUrl },
+    { title: "profile | yukimizu Portfolio" }
+  ];
 }
 
 export default function Profile() {
