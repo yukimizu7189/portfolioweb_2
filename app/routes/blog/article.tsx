@@ -27,7 +27,7 @@ export async function loader({ params }: Route.LoaderArgs) {
 }
 
 export function meta({ data }: Route.MetaArgs) {
-  const siteTitle = "works | yukimizu Portfolio ";
+  const siteTitle = `${data?.title} | yukimizu Blog`;
   const siteDescription = "yukimizuのポートフォリオサイトです。";
   const siteUrl = "https://portfolio.yukidokemizu.com";
   const imageUrl = `${siteUrl}/icon.jpg`;
@@ -48,7 +48,6 @@ export function meta({ data }: Route.MetaArgs) {
     { name: "twitter:title", content: siteTitle },
     { name: "twitter:description", content: siteDescription },
     { name: "twitter:image", content: imageUrl },
-    { title: "works | yukimizu Portfolio" },
     { title: `${data?.title} | yukimizu Blog` }
   ];
 }

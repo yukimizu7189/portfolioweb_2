@@ -58,7 +58,6 @@ export function meta({}: Route.MetaArgs) {
     { name: "twitter:title", content: siteTitle },
     { name: "twitter:description", content: siteDescription },
     { name: "twitter:image", content: imageUrl },
-    { title: "works | yukimizu Portfolio" },
     { title: "Blog | yukimizu Portfolio" }
   ];
 }
