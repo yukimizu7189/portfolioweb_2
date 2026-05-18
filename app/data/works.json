@@ -96,7 +96,43 @@
     "id": "16",
     "type": "Design",
     "title": "名刺",
-    "imageUrl": "../2026_handle_omote.jpg",
+    "imageUrl": "/2026_handle_omote.jpg",
     "date": "2026.05.17"
+  },
+  {
+    "id": "17",
+    "type": "Cosplay_photo",
+    "tweetUrl": "https://x.com/porisoltc4/status/1940759894074053069?s=20",
+    "date": "2025.07.03"
+  },
+  {
+    "id": "18",
+    "type": "Cosplay_photo",
+    "tweetUrl": "https://x.com/porisoltc4/status/1940727962669928864?s=20",
+    "date": "2025.07.03"
+  },
+  {
+    "id": "19",
+    "type": "Cosplay_photo",
+    "tweetUrl": "https://x.com/tsu16_o8/status/2050168397099569576?s=20",
+    "date": "2026.05.01"
+  },
+  {
+    "id": "20",
+    "type": "Cosplay_photo",
+    "tweetUrl": "https://x.com/tsu16_o8/status/2040709237903671540?s=20",
+    "date": "2026.04.05"
+  },
+  {
+    "id": "21",
+    "type": "Cosplay_photo",
+    "tweetUrl": "https://x.com/tsu16_o8/status/1971518211201093839?s=20",
+    "date": "2025.09.26"
+  },
+  {
+    "id": "22",
+    "type": "Cosplay_photo",
+    "tweetUrl": "https://x.com/tsu16_o8/status/1972694107790393391?s=20",
+    "date": "2025.09.30"
   }
 ]

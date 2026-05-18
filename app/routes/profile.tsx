@@ -19,7 +19,7 @@ export default function Profile() {
               
               <div className="w-32 h-32 flex-shrink-0">
                 <img 
-                  src="../../yukimizu_real.jpg" 
+                  src="/icon.jpg" 
                   alt="yukimizu" 
                   className="w-full h-full rounded-full object-cover border-4 border-white shadow-lg"
                 />
