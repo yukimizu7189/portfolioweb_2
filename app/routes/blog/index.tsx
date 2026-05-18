@@ -67,9 +67,9 @@ export default function BlogIndex({ loaderData }: Route.ComponentProps) {
   return (
     <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-10">
       <FadeIn>
-        <header className="border-b pb-4">
-          <h1 className="text-4xl font-extrabold text-white tracking-tight">Blog</h1>
-          <p className="mt-2 text-gray-300 text-lg">技術の学びや日常の記録</p>
+        <header className="border-b-2 border-black pb-4">
+          <h1 className="text-4xl font-extrabold text-black tracking-tighter uppercase">Blog</h1>
+          <p className="mt-2 text-gray-600 text-lg font-medium">技術の学びや日常の記録</p>
         </header>
       </FadeIn>
 
@@ -78,13 +78,13 @@ export default function BlogIndex({ loaderData }: Route.ComponentProps) {
           // 💡 小さな修正: Reactの key は map の直下（一番外側のタグ）に付ける必要があるため、FadeIn に移動しました
           <FadeIn key={post.slug} delay={index * 150}>
             <article 
-              className="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-200"
+              className="group bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-accent-200 hover:shadow-md transition-all duration-200"
             >
               <Link to={`/blog/${post.slug}`} className="block">
-                <time className="text-sm font-semibold tracking-wide text-blue-600 uppercase">
+                <time className="text-sm font-semibold tracking-wide text-accent-600 uppercase" style={{ color: '#ff1a6d' }}>
                   {post.date}
                 </time>
-                <h2 className="mt-2 text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                <h2 className="mt-2 text-2xl font-bold text-gray-900 group-hover:text-accent-600 transition-colors">
                   {post.title}
                 </h2>
               </Link>

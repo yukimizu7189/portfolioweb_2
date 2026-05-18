@@ -31,9 +31,9 @@ export default function Contact() {
   return (
     <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-10">
       <FadeIn>
-        <header className="border-b pb-4">
-          <h1 className="text-4xl font-extrabold text-white tracking-tight">Contact</h1>
-          <p className="mt-2 text-gray-300 text-lg">
+        <header className="border-b-2 border-black pb-4">
+          <h1 className="text-4xl font-extrabold text-black tracking-tighter uppercase">Contact</h1>
+          <p className="mt-2 text-gray-600 text-lg font-medium">
             ご連絡はこちらからお願いします
           </p>
         </header>
@@ -43,15 +43,15 @@ export default function Contact() {
         <FadeIn delay={150}>
           <a 
             href="mailto:yukidokemizu7189@gmail.com" 
-            className="group flex items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 hover:shadow-md transition-all duration-300"
+            className="group flex items-center bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-accent-300 hover:shadow-md transition-all duration-300"
           >
-            <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0">
+            <div className="w-12 h-12 rounded-full bg-accent-50 text-accent-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0" style={{ backgroundColor: 'rgba(255, 26, 109, 0.05)', color: '#ff1a6d' }}>
               <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
               </svg>
             </div>
             <div className="ml-6">
-              <h2 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Email</h2>
+              <h2 className="text-xl font-bold text-gray-900 group-hover:text-accent-600 transition-colors">Email</h2>
               <p className="text-gray-500 mt-1">yukidokemizu7189@gmail.com</p>
             </div>
           </a>
@@ -61,7 +61,7 @@ export default function Contact() {
             href="https://x.com/yukimizu7189" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="group flex items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-gray-900 hover:shadow-md transition-all duration-300"
+            className="group flex items-center bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-black hover:shadow-md transition-all duration-300"
           >
             <div className="w-12 h-12 rounded-full bg-gray-50 text-gray-900 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -79,7 +79,7 @@ export default function Contact() {
             href="https://x.com/yukimizucosplay" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="group flex items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-gray-900 hover:shadow-md transition-all duration-300"
+            className="group flex items-center bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-black hover:shadow-md transition-all duration-300"
           >
             <div className="w-12 h-12 rounded-full bg-gray-50 text-gray-900 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -97,7 +97,7 @@ export default function Contact() {
             href="https://github.com/yukimizu7189 " 
             target="_blank" 
             rel="noopener noreferrer"
-            className="group flex items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-gray-900 hover:shadow-md transition-all duration-300"
+            className="group flex items-center bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-black hover:shadow-md transition-all duration-300"
           >
             <div className="w-12 h-12 rounded-full bg-gray-50 text-gray-900 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0">
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">

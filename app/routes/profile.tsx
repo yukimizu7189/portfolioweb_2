@@ -34,9 +34,10 @@ export default function Profile() {
       {/* ▼ 1. ヘッダー＆基本情報エリア */}
       <section className="text-center space-y-6">
         <FadeIn delay={0}>
-          <h1 className="text-5xl font-extrabold text-white tracking-tight">Profile</h1>
+          <h1 className="text-5xl font-extrabold text-black tracking-tighter uppercase">Profile</h1>
+          <div className="h-1.5 w-24 bg-accent-500 mx-auto mt-2" style={{ backgroundColor: '#ff1a6d' }}></div>
           
-          <div className="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-gray-100 inline-block text-left w-full max-w-3xl">
+          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 sm:p-12 shadow-sm border border-gray-100 inline-block text-left w-full max-w-3xl mt-8">
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-8">
               
               <div className="w-32 h-32 flex-shrink-0">
@@ -50,7 +51,7 @@ export default function Profile() {
               <div className="space-y-4">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900">yukimizu</h2>
-                  <p className="text-sm font-medium text-gray-500 mt-1">筑波大学 情報学群 情報メディア創成学類</p>
+                  <p className="text-sm font-medium text-gray-600 mt-1">筑波大学 情報学群 情報メディア創成学類</p>
                 </div>
                 <p className="text-gray-700 leading-relaxed">
                   神奈川県横浜市在住の大学生<br />
@@ -66,8 +67,8 @@ export default function Profile() {
       <section className="space-y-8">
         <FadeIn delay={150}>
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-white">所属組織</h2>
-            <p className="text-gray-500 mt-2">Activities & Organizations</p>
+            <h2 className="text-3xl font-bold text-black uppercase tracking-tight">所属組織</h2>
+            <p className="text-gray-600 mt-2 font-medium">Activities & Organizations</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

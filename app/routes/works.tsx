@@ -94,10 +94,10 @@ export default function Works({ loaderData }: Route.ComponentProps) {
 
   return (
     <div className="max-w-5xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-10">
-      
-      <header className="border-b pb-4">
-        <h1 className="text-4xl font-extrabold text-white tracking-tight">Works</h1>
-        <p className="mt-2 text-gray-300 text-lg">写真、映像、デザイン、コスプレなど</p>
+
+      <header className="border-b-2 border-black pb-4">
+        <h1 className="text-4xl font-extrabold text-black tracking-tighter uppercase">Works</h1>
+        <p className="mt-2 text-gray-600 text-lg font-medium">写真、映像、デザイン、コスプレなど</p>
       </header>
 
       <div className="flex flex-wrap gap-3">
@@ -105,11 +105,12 @@ export default function Works({ loaderData }: Route.ComponentProps) {
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 ${
+            className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 border ${
               selectedCategory === category
-                ? "bg-blue-700 text-white shadow-md" 
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200" 
+                ? "bg-accent-600 text-white shadow-md border-accent-600" 
+                : "bg-white/50 backdrop-blur-sm text-gray-600 hover:bg-gray-100 border-gray-200" 
             }`}
+            style={selectedCategory === category ? { backgroundColor: '#ff1a6d', borderColor: '#ff1a6d' } : {}}
           >
             {category.replace("_", " ")}
           </button>
@@ -117,21 +118,21 @@ export default function Works({ loaderData }: Route.ComponentProps) {
       </div>
 
       <div className="columns-1 sm:columns-2 md:columns-3 gap-6">
-        
+
         {filteredWorks.map((work, index) => {
           const CardWrapper = work.link ? "a" : "div";
           const wrapperProps = work.link ? { href: work.link, target: "_blank", rel: "noopener noreferrer" } : {};
 
           return (
-            <FadeIn key={work.id} delay={index * 150}>
+            <FadeIn key={work.id} delay={index * 100}>
               <CardWrapper
                 key={work.id}
                 {...wrapperProps}
-                className={`break-inside-avoid mb-6 group flex flex-col bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-200 ${
-                  work.link ? "hover:border-blue-200 hover:shadow-md cursor-pointer" : ""
+                className={`break-inside-avoid mb-6 group flex flex-col bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-200 ${
+                  work.link ? "hover:border-accent-200 hover:shadow-md cursor-pointer" : ""
                 }`}
               >
-                
+
                 {work.imageUrl && (
                   <div className="relative bg-gray-100 overflow-hidden">
                     <img 
@@ -151,18 +152,17 @@ export default function Works({ loaderData }: Route.ComponentProps) {
 
                 <div className="p-5 flex-grow flex flex-col">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold tracking-wider text-blue-600 uppercase">
+                    <span className="text-xs font-bold tracking-wider text-accent-600 uppercase" style={{ color: '#ff1a6d' }}>
                       {work.type.replace("_", " ")}
                     </span>
                     <time className="text-xs text-gray-400">{work.date}</time>
                   </div>
-                  
+
                   {work.title && (
-                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-lg font-bold text-black group-hover:text-accent-600 transition-colors">
                       {work.title}
                     </h3>
                   )}
-
                   {work.description && (
                     <p className="text-sm text-gray-700 leading-relaxed mt-2 line-clamp-3">
                       {work.description}
@@ -175,7 +175,7 @@ export default function Works({ loaderData }: Route.ComponentProps) {
           );
         })}
       </div>
-      
+
     </div>
   );
 }

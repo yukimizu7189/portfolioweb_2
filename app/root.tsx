@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import type { Route } from "./+types/root";
 import "./app.css";
+import RichBackground from "./components/RichBackground";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -37,18 +38,34 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <link rel="icon" type="image/x-icon" href="/favicon.jpg" />
         <Links />
       </head>
-      <body className="overflow-y-scroll">
-        <div className="flex flex-col min-h-screen">
-          <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md p-4 border-b border-gray-100/50 shadow-sm transition-all">
+      <body className="overflow-y-scroll relative" style={{ backgroundColor: 'white', color: 'black' }}>
+        <RichBackground />
+        <div className="flex flex-col min-h-screen relative z-10">
+          <header className="sticky top-0 z-50 bg-white/60 backdrop-blur-xl p-4 border-b border-gray-200/50 transition-all">
             <nav className="flex max-w-7xl mx-auto justify-between items-center">
-              <div className="font-bold text-2xl text-black hover:text-gray-600 rounded-md transition-colors">
-                <Link to="/">Portfolio / yukimizu</Link>
+              <div className="font-light text-2xl text-black hover:text-accent-600 transition-colors tracking-tighter">
+                <Link to="/" className="group flex items-center gap-2">
+                  {/* <span className="w-2 h-2 bg-accent-500 rounded-full group-hover:scale-150 transition-transform" style={{ backgroundColor: '#ff1a6d' }}></span> */}
+                  <span>Portfolio / yukimizu</span>
+                </Link>
               </div>
-              <div className="hidden md:flex gap-8 font-bold text-lg text-black items-center">
-                <Link to="/profile" className="hover:text-gray-600 transition-colors">profile</Link>
-                <Link to="/works" className="hover:text-gray-600 transition-colors">works</Link>
-                <Link to="/contact" className="hover:text-gray-600 transition-colors">contact</Link>
-                <Link to="/blog" className="hover:text-gray-600 transition-colors">blog</Link>
+              <div className="hidden md:flex gap-10 font-light text-sm uppercase tracking-[0.2em] text-gray-500 items-center">
+                <Link to="/profile" className="hover:text-accent-500 hover:font-bold transition-all relative group">
+                  profile
+                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-accent-500 transition-all group-hover:w-full" style={{ backgroundColor: '#ff1a6d' }}></span>
+                </Link>
+                <Link to="/works" className="hover:text-accent-500 hover:font-bold transition-all relative group">
+                  works
+                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-accent-500 transition-all group-hover:w-full" style={{ backgroundColor: '#ff1a6d' }}></span>
+                </Link>
+                <Link to="/contact" className="hover:text-accent-500 hover:font-bold transition-all relative group">
+                  contact
+                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-accent-500 transition-all group-hover:w-full" style={{ backgroundColor: '#ff1a6d' }}></span>
+                </Link>
+                <Link to="/blog" className="hover:text-accent-500 hover:font-bold transition-all relative group">
+                  blog
+                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-accent-500 transition-all group-hover:w-full" style={{ backgroundColor: '#ff1a6d' }}></span>
+                </Link>
               </div>
               <button
                 className="md:hidden p-2 focus:outline-none text-black hover:text-gray-400"
@@ -63,23 +80,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </button>
             </nav>
             
-            {isMenuOpen && (
-              <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md px-4 py-4 space-y-4 text-black border-b border-gray-100 shadow-lg">
-                <Link to="/profile" className="block font-bold hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>profile</Link>
-                <Link to="/works" className="block font-bold hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>works</Link>
-                <Link to="/contact" className="block font-bold hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>contact</Link>
-                <Link to="/blog" className="block font-bold hover:text-gray-600" onClick={() => setIsMenuOpen(false)}>blog</Link>
+            <div className={`md:hidden absolute top-full left-0 w-full bg-white/80 backdrop-blur-xl px-4 py-8 space-y-6 text-center border-b border-gray-100 shadow-xl transition-all duration-300 origin-top ${
+              isMenuOpen ? "opacity-100 scale-y-100 translate-y-0" : "opacity-0 scale-y-95 -translate-y-2 pointer-events-none"
+            }`}>
+              <Link to="/profile" className="block font-light text-xl uppercase tracking-widest hover:text-accent-500 transition-colors" onClick={() => setIsMenuOpen(false)}>profile</Link>
+              <Link to="/works" className="block font-light text-xl uppercase tracking-widest hover:text-accent-500 transition-colors" onClick={() => setIsMenuOpen(false)}>works</Link>
+              <Link to="/contact" className="block font-light text-xl uppercase tracking-widest hover:text-accent-500 transition-colors" onClick={() => setIsMenuOpen(false)}>contact</Link>
+              <Link to="/blog" className="block font-light text-xl uppercase tracking-widest hover:text-accent-500 transition-colors" onClick={() => setIsMenuOpen(false)}>blog</Link>
+              <div className="pt-4 flex justify-center">
+                <div className="w-12 h-[1px] bg-accent-500" style={{ backgroundColor: '#ff1a6d' }}></div>
               </div>
-              )
-            }
+            </div>
           </header>
-          <main className="flex-grow bg-black">
+          <main className="flex-grow">
             {children}
           </main>
           
-          <footer className="py-8 mt-auto bg-black">
+          <footer className="py-8 mt-auto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
-              <p className="text-sm text-gray-400 font-medium tracking-wider">
+              <p className="text-sm text-gray-500 font-medium tracking-wider">
                 &copy; {new Date().getFullYear()} yukimizu. All rights reserved.
               </p>
             </div>
