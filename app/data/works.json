@@ -91,5 +91,12 @@
     "type": "Cosplay_photo",
     "tweetUrl": "https://x.com/renu273_cos/status/1964084419956003024?s=20",
     "date": "2025.09.06"
+  },
+  {
+    "id": "16",
+    "type": "Design",
+    "title": "名刺",
+    "imageUrl": "../2026_handle_omote.jpg",
+    "date": "2026.05.17"
   }
 ]

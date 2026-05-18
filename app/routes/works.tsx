@@ -27,7 +27,7 @@ export async function loader() {
           const apiUrl = parsedUrl.toString();
 
           const response = await fetch(apiUrl, {
-            headers: {
+            headers: {"User-Agent": "YukimizuPortfolio/2.0 (+https://portfolio.yukidokemizu.com)",
             },
           });
           
