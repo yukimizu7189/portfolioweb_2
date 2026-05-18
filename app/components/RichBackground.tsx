@@ -63,20 +63,6 @@ export default function RichBackground() {
         className="absolute inset-0 transition-transform duration-100"
         style={{ transform: "translateY(calc(var(--scroll-y) * -0.25))" }}
       >
-        {/* Prominent Crosses */}
-        <div className="absolute top-[35%] left-[35%] text-black/20">
-          <svg width="40" height="40" viewBox="0 0 15 15" fill="currentColor">
-            <rect x="7" y="0" width="1.5" height="15" />
-            <rect x="0" y="7" width="15" height="1.5" />
-          </svg>
-        </div>
-        <div className="absolute top-[65%] right-[35%] text-accent-500/40" style={{ color: 'rgba(255, 26, 109, 0.4)' }}>
-          <svg width="60" height="60" viewBox="0 0 25 25" fill="currentColor">
-            <rect x="12" y="0" width="1.5" height="25" />
-            <rect x="0" y="12" width="25" height="1.5" />
-          </svg>
-        </div>
-
         {/* Resized Floating Squares (Smaller) */}
         <div className="absolute top-[15%] right-[10%] w-12 h-12 border-2 border-black/10 rotate-12" />
         <div className="absolute bottom-[25%] left-[10%] w-16 h-16 border-2 border-accent-500/20 rotate-45" style={{ borderColor: 'rgba(255, 26, 109, 0.2)' }} />
@@ -112,10 +98,6 @@ export default function RichBackground() {
         <Sparkle size={200} className="absolute top-[60%] left-[-50px] text-accent-500/10 rotate-[25deg]" style={{ color: 'rgba(255, 26, 109, 0.1)' }} />
         <Sparkle size={120} className="absolute top-[5%] left-[40%] text-black/5 -rotate-[15deg]" />
       </div>
-      
-      {/* Bold Decorative Lines (Non-Parallax) */}
-      <div className="absolute top-1/2 left-0 w-full h-[2px] bg-black/10" />
-      <div className="absolute top-0 left-1/2 w-[2px] h-full bg-black/10" />
     </div>
   );
 }
