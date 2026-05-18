@@ -73,7 +73,7 @@ export function meta({}: Route.MetaArgs) {
     { property: "og:image", content: imageUrl },
 
     //X専用の設定
-    { name: "twitter:card", content: "summary" }, 
+    { name: "twitter:card", content: "summary_large_image" }, 
     { name: "twitter:site", content: "@yukimizu7189" }, 
     { name: "twitter:title", content: siteTitle },
     { name: "twitter:description", content: siteDescription },
