@@ -1,87 +1,32 @@
-# Welcome to React Router!
+# yukimizu Portfolio Site
 
-A modern, production-ready template for building full-stack React applications using React Router.
+このリポジトリは、yukimizuのポートフォリオサイトのソースコードです。
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## サイトの概要
 
-## Features
+自身の制作実績をまとめ、対外的に公開するためのポートフォリオサイトです。
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- **Works**: 制作した映像作品、写真、コスプレ撮影写真、デザインなどの実績を掲載
+- **Profile**: 自己紹介を掲載
+- **Blog**: 日々の記録を綴るブログ
+- **Contact**: SNSリンクなど
 
-## Getting Started
+## 技術的説明
 
-### Installation
+最新のWeb技術を活用し、パフォーマンスとメンテナンス性を両立させています。
 
-Install the dependencies:
+### フロントエンド / バックエンド
+- **React Router v7**: フレームワークとして採用。SSR（サーバーサイドレンダリング）による高速な初期表示とSEO最適化を実現しています。
+- **TypeScript**: 厳密な型定義により、安全で効率的な開発を行っています。
 
-```bash
-npm install
-```
+### スタイリング
+- **Tailwind CSS v4**: モダンなCSSフレームワークを使用し、レスポンシブで洗練されたデザインを構築。
 
-### Development
+### データ管理
+- **実績データ**: `app/data/works.json` で管理。構造化されたデータにより、一覧の自動生成を行っています。
+- **ブログ記事**: `app/posts/` 内のMarkdownファイルで管理。`gray-matter` でメタデータを、`react-markdown` でコンテンツをレンダリングしています。
 
-Start the development server with HMR:
+### デプロイ
+- **Cloudflare Workers(Pages)**: ホスティング先として採用。
+- **Wrangler**: Cloudflareへのデプロイおよびローカル開発環境の構築に使用。
 
-```bash
-npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
