@@ -84,6 +84,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Works({ loaderData }: Route.ComponentProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [modalImage, setModalImage] = useState<{ url: string; title?: string } | null>(null);
 
   const categories = ["All", "Photo", "Video", "Design", "Cosplay_photo"];
 
@@ -94,6 +95,45 @@ export default function Works({ loaderData }: Route.ComponentProps) {
 
   return (
     <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 space-y-16">
+      {/* Modal */}
+      <div 
+        className={`fixed inset-0 z-[100] flex items-center justify-center p-4 transition-all duration-500 ${
+          modalImage ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div 
+          className="absolute inset-0 bg-black/95 backdrop-blur-xl"
+          onClick={() => setModalImage(null)}
+        />
+        <div 
+          className={`relative max-w-5xl max-h-full transition-all duration-500 transform ${
+            modalImage ? "scale-100 translate-y-0" : "scale-95 translate-y-4"
+          }`}
+        >
+          <button 
+            className="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors p-2"
+            onClick={() => setModalImage(null)}
+          >
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          {modalImage && (
+            <div className="space-y-4">
+              <img 
+                src={modalImage.url} 
+                alt={modalImage.title || "Work Image"} 
+                className="w-auto h-auto max-w-full max-h-[80vh] object-contain shadow-2xl border border-white/10"
+              />
+              {modalImage.title && (
+                <p className="text-white text-center font-black tracking-widest uppercase text-lg">
+                  {modalImage.title}
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
 
       <header className="space-y-4">
         <h1 className="text-5xl md:text-7xl font-black text-black uppercase tracking-tighter flex items-center gap-6">
@@ -123,17 +163,18 @@ export default function Works({ loaderData }: Route.ComponentProps) {
 
       <div className="columns-1 md:columns-2 lg:columns-3 gap-10 space-y-10">
         {filteredWorks.map((work, index) => {
-          const CardWrapper = work.link ? "a" : "div";
-          const wrapperProps = work.link ? { href: work.link, target: "_blank", rel: "noopener noreferrer" } : {};
+          const isExternal = !!work.link;
+          const CardWrapper = isExternal ? "a" : "div";
+          const wrapperProps = isExternal 
+            ? { href: work.link, target: "_blank", rel: "noopener noreferrer" } 
+            : { onClick: () => work.imageUrl && setModalImage({ url: work.imageUrl, title: work.title }) };
 
           return (
             <FadeIn key={work.id} delay={index * 50}>
               <CardWrapper
                 key={work.id}
                 {...wrapperProps}
-                className={`break-inside-avoid mb-10 group block relative bg-white transition-all duration-500 ${
-                  work.link ? "cursor-pointer" : ""
-                }`}
+                className={`break-inside-avoid mb-10 group block relative bg-white transition-all duration-500 cursor-pointer`}
               >
                 <div className="relative overflow-hidden bg-gray-50 border border-gray-50">
                   {work.imageUrl && (
@@ -143,7 +184,19 @@ export default function Works({ loaderData }: Route.ComponentProps) {
                       className="w-full h-auto block transition-all duration-700 group-hover:scale-[1.03]"
                     />
                   )}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
+                  <div className={`absolute inset-0 transition-colors ${
+                    isExternal ? "group-hover:bg-black/5" : "group-hover:bg-black/20 flex items-center justify-center"
+                  }`}>
+                    {!isExternal && (
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-90 group-hover:scale-100">
+                        <div className="bg-white/90 p-4 rounded-full shadow-2xl">
+                          <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                          </svg>
+                        </div>
+                      </div>
+                    )}
+                  </div>
 
                   {/* Category Tag on Image */}
                   <div className="absolute top-4 left-4">
