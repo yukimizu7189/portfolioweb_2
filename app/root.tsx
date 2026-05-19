@@ -64,11 +64,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <link rel="icon" type="image/x-icon" href="/favicon.jpg" />
         <Links />
       </head>
-      <body className="overflow-y-scroll relative" style={{ backgroundColor: 'white', color: 'black' }}>
+      <body className="overflow-y-scroll overflow-x-hidden relative" style={{ backgroundColor: 'white', color: 'black' }}>
         <RichBackground title={getPageTitle(location.pathname)} />
         <div className="flex flex-col min-h-screen relative z-10">
 
-          <header className="sticky top-0 z-50 bg-white/60 backdrop-blur-xl p-4 border-b border-gray-200/50 transition-all">
+          <header className={`sticky top-0 p-4 border-b border-gray-200/50 transition-all ${
+            isMenuOpen ? "z-[70] bg-transparent border-transparent" : "z-50 bg-white/60 backdrop-blur-xl"
+          }`}>
             <nav className="flex max-w-7xl mx-auto justify-between items-center">
               <div className="font-light text-2xl text-black hover:text-accent-600 transition-colors tracking-tighter">
                 <Link to="/" className="group flex items-center gap-2">
@@ -106,20 +108,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 </svg>
               </button>
             </nav>
-            
-            <div className={`md:hidden fixed inset-0 z-[60] bg-white/95 backdrop-blur-2xl flex flex-col items-center justify-center space-y-8 transition-transform duration-500 ease-in-out ${
-              isMenuOpen ? "translate-x-0" : "translate-x-full"
-            }`}>
-              <Link to="/" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>home</Link>
-              <Link to="/profile" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>profile</Link>
-              <Link to="/works" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>works</Link>
-              <Link to="/contact" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>contact</Link>
-              <Link to="/blog" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>blog</Link>
-              <div className="pt-8">
-                <div className="w-16 h-[2px] bg-accent-500" style={{ backgroundColor: '#ff1a6d' }}></div>
-              </div>
-            </div>
           </header>
+
+          <div className={`md:hidden fixed inset-0 z-[60] bg-white/95 backdrop-blur-2xl flex flex-col items-center justify-center space-y-8 transition-all duration-500 ease-in-out ${
+            isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none invisible"
+          }`}>
+            <Link to="/" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>home</Link>
+            <Link to="/profile" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>profile</Link>
+            <Link to="/works" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>works</Link>
+            <Link to="/contact" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>contact</Link>
+            <Link to="/blog" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>blog</Link>
+            <div className="pt-8">
+              <div className="w-16 h-[2px] bg-accent-500" style={{ backgroundColor: '#ff1a6d' }}></div>
+            </div>
+          </div>
+
           <main className="flex-grow">
             {children}
           </main>
