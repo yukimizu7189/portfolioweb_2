@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from "react";
 
-const Sparkle = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
+const Sparkle = ({ size = 24, className = "", style = {} }: { size?: number, className?: string, style?: React.CSSProperties }) => (
   <svg 
     width={size} 
     height={size} 
     viewBox="0 0 24 24" 
     fill="currentColor" 
     className={className}
+    style={style}
   >
     <path d="M12 0Q12 12 0 12Q12 12 12 24Q12 12 24 12Q12 12 12 0Z" />
   </svg>

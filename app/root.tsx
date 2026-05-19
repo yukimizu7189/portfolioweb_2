@@ -8,7 +8,7 @@ import {
   ScrollRestoration,
   useLocation,
 } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Route } from "./+types/root";
 import "./app.css";
 import RichBackground from "./components/RichBackground";
@@ -31,6 +31,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const location = useLocation();
+
+  // Handle body scroll locking
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isMenuOpen]);
+
   const getPageTitle = (pathname: string) => {
     if (pathname === "/") return "Home";
     if (pathname.startsWith("/profile")) return "Profile";
@@ -80,7 +95,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 </Link>
               </div>
               <button
-                className="md:hidden p-2 focus:outline-none text-black hover:text-gray-400"
+                className="md:hidden p-2 focus:outline-none text-black hover:text-gray-400 relative z-[70]"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   {isMenuOpen ? (
@@ -92,15 +107,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </button>
             </nav>
             
-            <div className={`md:hidden absolute top-full left-0 w-full bg-white/80 backdrop-blur-xl px-4 py-8 space-y-6 text-center border-b border-gray-100 shadow-xl transition-all duration-300 origin-top ${
-              isMenuOpen ? "opacity-100 scale-y-100 translate-y-0" : "opacity-0 scale-y-95 -translate-y-2 pointer-events-none"
+            <div className={`md:hidden fixed inset-0 z-[60] bg-white/95 backdrop-blur-2xl flex flex-col items-center justify-center space-y-8 transition-transform duration-500 ease-in-out ${
+              isMenuOpen ? "translate-x-0" : "translate-x-full"
             }`}>
-              <Link to="/profile" className="block font-light text-xl uppercase tracking-widest hover:text-accent-500 transition-colors" onClick={() => setIsMenuOpen(false)}>profile</Link>
-              <Link to="/works" className="block font-light text-xl uppercase tracking-widest hover:text-accent-500 transition-colors" onClick={() => setIsMenuOpen(false)}>works</Link>
-              <Link to="/contact" className="block font-light text-xl uppercase tracking-widest hover:text-accent-500 transition-colors" onClick={() => setIsMenuOpen(false)}>contact</Link>
-              <Link to="/blog" className="block font-light text-xl uppercase tracking-widest hover:text-accent-500 transition-colors" onClick={() => setIsMenuOpen(false)}>blog</Link>
-              <div className="pt-4 flex justify-center">
-                <div className="w-12 h-[1px] bg-accent-500" style={{ backgroundColor: '#ff1a6d' }}></div>
+              <Link to="/" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>home</Link>
+              <Link to="/profile" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>profile</Link>
+              <Link to="/works" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>works</Link>
+              <Link to="/contact" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>contact</Link>
+              <Link to="/blog" className="font-light text-3xl uppercase tracking-[0.3em] hover:text-accent-500 transition-all hover:scale-110" onClick={() => setIsMenuOpen(false)}>blog</Link>
+              <div className="pt-8">
+                <div className="w-16 h-[2px] bg-accent-500" style={{ backgroundColor: '#ff1a6d' }}></div>
               </div>
             </div>
           </header>
